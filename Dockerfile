@@ -38,3 +38,6 @@ RUN set -eux && \
    # 克隆源码
    git clone --depth=1 -b $VERSION --progress ${SOURCES} ${SOURCES_DIR} && \
    mkdir -pv /data && cp -rfp ${SOURCES_DIR}/paas-ce/paas /data/ && \
+   cp -rfp /data/paas/paas/conf/settings_production.py.sample /data/paas/paas/conf/settings_production.py && \
+   cp -rfp /data/paas/login/conf/settings_production.py.sample /data/paas/login/conf/settings_production.py && \
+   cp -rfp /tmp/paas/esb/configs/default_template.py /tmp/paas/esb/configs/default.py && \
