@@ -24,3 +24,16 @@ ENV DOCKER_IMAGE_TAG=$DOCKER_IMAGE_TAG
 # 环境设置
 ARG DEBIAN_FRONTEND=noninteractive
 ENV DEBIAN_FRONTEND=$DEBIAN_FRONTEND
+
+# 仓库信息
+ARG VERSION=master
+ENV VERSION=$VERSION
+ARG SOURCES=https://github.com/TencentBlueKing/legacy-bk-paas
+ENV SOURCES=$SOURCES
+ARG SOURCES_DIR=/tmp/legacy-bk-paas
+ENV SOURCES_DIR=$SOURCES_DIR
+
+# ***** 克隆源码 *****
+RUN set -eux && \
+   # 克隆源码
+   git clone --depth=1 -b $VERSION --progress ${SOURCES} ${SOURCES_DIR}
