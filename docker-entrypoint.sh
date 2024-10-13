@@ -44,10 +44,10 @@ check_variables_mysql() {
     # If root password is not specified use provided credentials
     DB_SERVER_ROOT_USER=${DB_SERVER_ROOT_USER:-${MYSQL_USER}}
     [ "${MYSQL_ALLOW_EMPTY_PASSWORD,,}" == "true" ] || DB_SERVER_ROOT_PASS=${DB_SERVER_ROOT_PASS:-${MYSQL_PASSWORD}}
-    DB_SERVER_USER=${MYSQL_USER:-"zabbix"}
-    DB_SERVER_PASS=${MYSQL_PASSWORD:-"zabbix"}
+    DB_SERVER_USER=${MYSQL_USER:-"root"}
+    DB_SERVER_PASS=${MYSQL_PASSWORD:-"ysyh!9Sky"}
 
-    DB_SERVER_DBNAME=${MYSQL_DATABASE:-"zabbix_proxy"}
+    DB_SERVER_DBNAME=${MYSQL_DATABASE:-"open_paas"}
 
     if [ ! -n "${DB_SERVER_SOCKET}" ]; then
         mysql_connect_args="-h ${DB_SERVER_HOST} -P ${DB_SERVER_PORT}"
@@ -191,4 +191,5 @@ prepare_db() {
 
 update_config() {
    sed -i "s/NAME[[:space:]]*':[[:space:]]*'open_paas/NAME': '$DB_SERVER_DBNAME/g" /data/paas/paas/conf/settings_production.py
+   
 }
