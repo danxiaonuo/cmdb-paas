@@ -40,4 +40,30 @@ RUN set -eux && \
    mkdir -pv /data && cp -rfp ${SOURCES_DIR}/paas-ce/paas /data/ && \
    cp -rfp /data/paas/paas/conf/settings_production.py.sample /data/paas/paas/conf/settings_production.py && \
    cp -rfp /data/paas/login/conf/settings_production.py.sample /data/paas/login/conf/settings_production.py && \
-   cp -rfp /tmp/paas/esb/configs/default_template.py /tmp/paas/esb/configs/default.py && \
+   cp -rfp /tmp/paas/esb/configs/default_template.py /tmp/paas/esb/configs/default.py
+
+# 拷贝文件
+COPY ["./docker-entrypoint.sh", "/usr/bin/"]
+COPY ["./conf/supervisor", "/etc/supervisor"]
+
+# ***** 目录授权 *****
+RUN set -eux && \
+    sed -i 's/^Defaults.*.requiretty/#Defaults    requiretty/' /etc/sudoers && \
+    cp -rf /root/.oh-my-zsh /data/paas/.oh-my-zsh && \
+    cp -rf /root/.zshrc /data/paas/.zshrc && \
+    sed -i '5s#/root/.oh-my-zsh#/data/paas/.oh-my-zsh#' /usr/local/zabbix/.zshrc && \
+    chmod a+x /usr/bin/docker-entrypoint.sh && \
+    chmod -R 775 /data && \
+    rm -rf /var/lib/apt/lists/* /tmp/*
+
+# ***** 容器信号处理 *****
+STOPSIGNAL SIGQUIT
+
+# ***** 工作目录 *****
+WORKDIR /data/paas
+
+# ***** 挂载目录 *****
+VOLUME ["/data/paas"]
+
+# ***** 入口 *****
+ENTRYPOINT ["docker-entrypoint.sh"]
