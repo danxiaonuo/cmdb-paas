@@ -1,4 +1,11 @@
-#!/bin/bash -e
+#!/bin/bash
+
+set -o pipefail
+
+set +e
+
+: ${DB_CHARACTER_SET:="utf8mb4"}
+: ${DB_CHARACTER_COLLATE:="utf8mb4_bin"}
 
 # 检查mysql数据库变量
 check_variables_mysql() {
