@@ -6,6 +6,7 @@ set +e
 
 : ${DB_CHARACTER_SET:="utf8mb4"}
 : ${DB_CHARACTER_COLLATE:="utf8mb4_bin"}
+: ${DB_SERVER_DBNAME:="open_paas"}
 
 # 检查mysql数据库变量
 check_variables_mysql() {
@@ -186,4 +187,8 @@ prepare_db() {
     check_db_connect_mysql
     create_db_user_mysql
     create_db_database_mysql
+}
+
+update_config() {
+   sed -i "s/NAME[[:space:]]*':[[:space:]]*'open_paas/NAME': '$DB_SERVER_DBNAME/g" /data/paas/paas/conf/settings_production.py
 }
