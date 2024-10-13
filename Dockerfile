@@ -36,4 +36,5 @@ ENV SOURCES_DIR=$SOURCES_DIR
 # ***** 克隆源码 *****
 RUN set -eux && \
    # 克隆源码
-   git clone --depth=1 -b $VERSION --progress ${SOURCES} ${SOURCES_DIR}
+   git clone --depth=1 -b $VERSION --progress ${SOURCES} ${SOURCES_DIR} && \
+   mkdir -pv /data && cp -rfp ${SOURCES_DIR}/paas-ce/paas /data/ && \
