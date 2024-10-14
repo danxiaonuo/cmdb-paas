@@ -55,7 +55,7 @@ COPY ["./conf/supervisor", "/etc/supervisor"]
 RUN set -eux && \
     cp -rf /root/.oh-my-zsh /data/paas/.oh-my-zsh && \
     cp -rf /root/.zshrc /data/paas/.zshrc && \
-    sed -i '5s#/root/.oh-my-zsh#/data/paas/.oh-my-zsh#' /usr/local/zabbix/.zshrc && \
+    sed -i '5s#/root/.oh-my-zsh#/data/paas/.oh-my-zsh#' /data/paas/.zshrc && \
     chmod a+x /usr/bin/docker-entrypoint.sh && \
     chmod -R 775 /data && \
     rm -rf /var/lib/apt/lists/* /tmp/*
