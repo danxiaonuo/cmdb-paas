@@ -62,9 +62,6 @@ RUN --mount=type=cache,target=/var/lib/apt/,sharing=locked \
    cp -rfp /data/paas/esb/configs/default_template.py /data/paas/esb/configs/default.py && \
    sed -i '/uWSGI/d' /data/paas/*/requirements.txt && \
    cd /data/paas/paas && pip install -r requirements.txt
-   # cd /data/paas/login && pip install -r requirements.txt && \
-   # cd /data/paas/appengine && pip install -r requirements.txt && \
-   # cd /data/paas/esb && pip install -r requirements.txt
 
 # 拷贝文件
 COPY ["./docker-entrypoint.sh", "/usr/bin/"]
