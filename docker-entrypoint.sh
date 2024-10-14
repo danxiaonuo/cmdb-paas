@@ -196,5 +196,6 @@ update_config() {
    sed -i "s/HOST[[:space:]]*':[[:space:]]*'[^']*'/HOST': '$DB_SERVER_HOST'/g" $PAAS_PATH/paas/conf/settings_production.py
    sed -i "s/PORT[[:space:]]*':[[:space:]]*'[^']*'/PORT': '$DB_SERVER_PORT'/g" $PAAS_PATH/paas/conf/settings_production.py
    sed -i "s/PAAS_DOMAIN[[:space:]]*=[[:space:]]*'[^']*'/PAAS_DOMAIN = '$PAASDOMAIN'/g" $PAAS_PATH/paas/conf/settings_production.py
+   sed -i "s/BK_COOKIE_DOMAIN[[:space:]]*=[[:space:]]*'[^']*'/BK_COOKIE_DOMAIN = '$COOKIEDOMAIN'/g" $PAAS_PATH/paas/conf/settings_production.py
    
 }
