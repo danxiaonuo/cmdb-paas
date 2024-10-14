@@ -40,7 +40,9 @@ RUN set -eux && \
    mkdir -pv /data && cp -rfp ${SOURCES_DIR}/paas-ce/paas /data/ && \
    cp -rfp /data/paas/paas/conf/settings_production.py.sample /data/paas/paas/conf/settings_production.py && \
    cp -rfp /data/paas/login/conf/settings_production.py.sample /data/paas/login/conf/settings_production.py && \
-   cp -rfp /tmp/paas/esb/configs/default_template.py /tmp/paas/esb/configs/default.py
+   cp -rfp /tmp/paas/esb/configs/default_template.py /data/paas/esb/configs/default.py && \
+   sed -i '/uWSGI/d' /data/paas/*/requirements.txt && \
+   pip install -r /data/paas/*/requirements.txt
 
 # 拷贝文件
 COPY ["./docker-entrypoint.sh", "/usr/bin/"]
