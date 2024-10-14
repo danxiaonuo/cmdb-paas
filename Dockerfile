@@ -53,7 +53,6 @@ COPY ["./conf/supervisor", "/etc/supervisor"]
 
 # ***** 目录授权 *****
 RUN set -eux && \
-    sed -i 's/^Defaults.*.requiretty/#Defaults    requiretty/' /etc/sudoers && \
     cp -rf /root/.oh-my-zsh /data/paas/.oh-my-zsh && \
     cp -rf /root/.zshrc /data/paas/.zshrc && \
     sed -i '5s#/root/.oh-my-zsh#/data/paas/.oh-my-zsh#' /usr/local/zabbix/.zshrc && \
