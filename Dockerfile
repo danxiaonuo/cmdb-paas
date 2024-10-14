@@ -26,7 +26,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV DEBIAN_FRONTEND=$DEBIAN_FRONTEND
 
 # 仓库信息
-ARG VERSION=master
+ARG VERSION=v5.2
 ENV VERSION=$VERSION
 ARG SOURCES=https://github.com/TencentBlueKing/legacy-bk-paas
 ENV SOURCES=$SOURCES
