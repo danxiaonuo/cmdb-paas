@@ -8,6 +8,33 @@ set +e
 : ${DB_CHARACTER_SET:="utf8mb4"}
 : ${DB_CHARACTER_COLLATE:="utf8mb4_bin"}
 
+file_env() {
+    local var="$1"
+    local fileVar="${var}_FILE"
+    local defaultValue="${2:-}"
+
+    if [ "${!var:-}" ] && [ "${!fileVar:-}" ]; then
+        echo "**** Both variables $var and $fileVar are set (but are exclusive)"
+        exit 1
+    fi
+
+    local val="$defaultValue"
+
+    if [ "${!var:-}" ]; then
+        val="${!var}"
+        echo "** Using ${var} variable from ENV"
+    elif [ "${!fileVar:-}" ]; then
+        if [ ! -f "${!fileVar}" ]; then
+            echo "**** Secret file \"${!fileVar}\" is not found"
+            exit 1
+        fi
+        val="$(< "${!fileVar}")"
+        echo "** Using ${var} variable from secret file"
+    fi
+    export "$var"="$val"
+    unset "$fileVar"
+}
+
 # 检查mysql数据库变量
 check_variables_mysql() {
     if [ ! -n "${DB_SERVER_SOCKET}" ]; then
