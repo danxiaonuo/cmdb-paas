@@ -217,9 +217,11 @@ prepare_db() {
 }
 
 update_config() {
-   sed -i "s|NAME[[:space:]]*':[[:space:]]*'[^']*|NAME': '$DB_SERVER_DBNAME|g" $PAAS_PATH/paas/conf/settings_production.py
-   sed -i "s|USER[[:space:]]*':[[:space:]]*'[^']*'|USER': '$DB_SERVER_USER'|g" $PAAS_PATH/paas/conf/settings_production.py
-   sed -i "s|PASSWORD[[:space:]]*':[[:space:]]*'[^']*'|PASSWORD': '$DB_SERVER_PASS'|g" $PAAS_PATH/paas/conf/settings_production.py
+   sed -i "s|development|production|g" $PAAS_PATH/paas/settings.py
+   sed -i "s|development|production|g" $PAAS_PATH/login/settings.py
+   sed -i "s|NAME[[:space:]]*':[[:space:]]*'[^']*|NAME': '$MYSQL_DATABASE|g" $PAAS_PATH/paas/conf/settings_production.py
+   sed -i "s|USER[[:space:]]*':[[:space:]]*'[^']*'|USER': '$MYSQL_USER'|g" $PAAS_PATH/paas/conf/settings_production.py
+   sed -i "s|PASSWORD[[:space:]]*':[[:space:]]*'[^']*'|PASSWORD': '$MYSQL_PASSWORD'|g" $PAAS_PATH/paas/conf/settings_production.py
    sed -i "s|HOST[[:space:]]*':[[:space:]]*'[^']*'|HOST': '$DB_SERVER_HOST'|g" $PAAS_PATH/paas/conf/settings_production.py
    sed -i "s|PORT[[:space:]]*':[[:space:]]*'[^']*'|PORT': '$DB_SERVER_PORT'|g" $PAAS_PATH/paas/conf/settings_production.py
    sed -i "s|PAAS_DOMAIN[[:space:]]*=[[:space:]]*'[^']*'|PAAS_DOMAIN = '$PAASDOMAIN'|g" $PAAS_PATH/paas/conf/settings_production.py
@@ -227,9 +229,9 @@ update_config() {
    sed -i "s|SECRET_KEY[[:space:]]*=[[:space:]]*'[^']*'|SECRET_KEY = '$SECRETKEY'|g" $PAAS_PATH/paas/conf/settings_production.py
    sed -i "s|ESB_TOKEN[[:space:]]*=[[:space:]]*'[^']*'|ESB_TOKEN = '$ESBTOKEN'|g" $PAAS_PATH/paas/conf/settings_production.py
 
-   sed -i "s|NAME[[:space:]]*':[[:space:]]*'[^']*|NAME': '$DB_SERVER_DBNAME|g" $PAAS_PATH/login/conf/settings_production.py
-   sed -i "s|USER[[:space:]]*':[[:space:]]*'[^']*'|USER': '$DB_SERVER_USER'|g" $PAAS_PATH/login/conf/settings_production.py
-   sed -i "s|PASSWORD[[:space:]]*':[[:space:]]*'[^']*'|PASSWORD': '$DB_SERVER_PASS'|g" $PAAS_PATH/login/conf/settings_production.py
+   sed -i "s|NAME[[:space:]]*':[[:space:]]*'[^']*|NAME': '$MYSQL_DATABASE|g" $PAAS_PATH/login/conf/settings_production.py
+   sed -i "s|USER[[:space:]]*':[[:space:]]*'[^']*'|USER': '$MYSQL_USER'|g" $PAAS_PATH/login/conf/settings_production.py
+   sed -i "s|PASSWORD[[:space:]]*':[[:space:]]*'[^']*'|PASSWORD': '$MYSQL_PASSWORD'|g" $PAAS_PATH/login/conf/settings_production.py
    sed -i "s|HOST[[:space:]]*':[[:space:]]*'[^']*'|HOST': '$DB_SERVER_HOST'|g" $PAAS_PATH/login/conf/settings_production.py
    sed -i "s|PORT[[:space:]]*':[[:space:]]*'[^']*'|PORT': '$DB_SERVER_PORT'|g" $PAAS_PATH/login/conf/settings_production.py
    sed -i "s|USERNAME[[:space:]]*=[[:space:]]*'[^']*'|USERNAME = '$PAASUSER'|g" $PAAS_PATH/login/conf/settings_production.py
@@ -238,16 +240,16 @@ update_config() {
    sed -i "s|SECRET_KEY[[:space:]]*=[[:space:]]*'[^']*'|SECRET_KEY = '$SECRETKEY'|g" $PAAS_PATH/login/conf/settings_production.py
    sed -i "s|ESB_TOKEN[[:space:]]*=[[:space:]]*'[^']*'|ESB_TOKEN = '$ESBTOKEN'|g" $PAAS_PATH/login/conf/settings_production.py
 
-   sed -i "s|NAME[[:space:]]*':[[:space:]]*'[^']*|NAME': '$DB_SERVER_DBNAME|g" $PAAS_PATH/appengine/controller/settings.py
-   sed -i "s|USER[[:space:]]*':[[:space:]]*'[^']*'|USER': '$DB_SERVER_USER'|g" $PAAS_PATH/appengine/controller/settings.py
-   sed -i "s|PASSWORD[[:space:]]*':[[:space:]]*'[^']*'|PASSWORD': '$DB_SERVER_PASS'|g" $PAAS_PATH/appengine/controller/settings.py
+   sed -i "s|NAME[[:space:]]*':[[:space:]]*'[^']*|NAME': '$MYSQL_DATABASE|g" $PAAS_PATH/appengine/controller/settings.py
+   sed -i "s|USER[[:space:]]*':[[:space:]]*'[^']*'|USER': '$MYSQL_USER'|g" $PAAS_PATH/appengine/controller/settings.py
+   sed -i "s|PASSWORD[[:space:]]*':[[:space:]]*'[^']*'|PASSWORD': '$MYSQL_PASSWORD'|g" $PAAS_PATH/appengine/controller/settings.py
    sed -i "s|HOST[[:space:]]*':[[:space:]]*'[^']*'|HOST': '$DB_SERVER_HOST'|g" $PAAS_PATH/appengine/controller/settings.py
    sed -i "s|PORT[[:space:]]*':[[:space:]]*'[^']*'|PORT': '$DB_SERVER_PORT'|g" $PAAS_PATH/appengine/controller/settings.py
    sed -i "s|SECRET_KEY[[:space:]]*=[[:space:]]*'[^']*'|SECRET_KEY = '$SECRETKEY'|g" $PAAS_PATH/appengine/controller/settings.py
 
-   sed -i "s|NAME[[:space:]]*':[[:space:]]*'[^']*|NAME': '$DB_SERVER_DBNAME|g" $PAAS_PATH/esb/configs/default.py
-   sed -i "s|USER[[:space:]]*':[[:space:]]*'[^']*'|USER': '$DB_SERVER_USER'|g" $PAAS_PATH/esb/configs/default.py
-   sed -i "s|PASSWORD[[:space:]]*':[[:space:]]*'[^']*'|PASSWORD': '$DB_SERVER_PASS'|g" $PAAS_PATH/esb/configs/default.py
+   sed -i "s|NAME[[:space:]]*':[[:space:]]*'[^']*|NAME': '$MYSQL_DATABASE|g" $PAAS_PATH/esb/configs/default.py
+   sed -i "s|USER[[:space:]]*':[[:space:]]*'[^']*'|USER': '$MYSQL_USER'|g" $PAAS_PATH/esb/configs/default.py
+   sed -i "s|PASSWORD[[:space:]]*':[[:space:]]*'[^']*'|PASSWORD': '$MYSQL_PASSWORD'|g" $PAAS_PATH/esb/configs/default.py
    sed -i "s|HOST[[:space:]]*':[[:space:]]*'[^']*'|HOST': '$DB_SERVER_HOST'|g" $PAAS_PATH/esb/configs/default.py
    sed -i "s|PORT[[:space:]]*':[[:space:]]*'[^']*'|PORT': '$DB_SERVER_PORT'|g" $PAAS_PATH/esb/configs/default.py
    sed -i "s|ESB_TOKEN[[:space:]]*=[[:space:]]*'[^']*'|ESB_TOKEN = '$ESBTOKEN'|g" $PAAS_PATH/esb/configs/default.py
