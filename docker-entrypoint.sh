@@ -238,3 +238,15 @@ prepare_db
 update_config
 migrate
 
+echo "########################################################"
+
+
+if [ -f "/usr/bin/supervisord" ]; then
+    echo "** Executing supervisord"
+    exec /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
+else
+    echo "Unknown instructions. Exiting..."
+    exit 1
+fi
+
+#################################################
