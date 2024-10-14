@@ -28,7 +28,7 @@ ENV DEBIAN_FRONTEND=$DEBIAN_FRONTEND
 # 仓库信息
 ARG VERSION=v5.2
 ENV VERSION=$VERSION
-ARG SOURCES=https://github.com/TencentBlueKing/legacy-bk-paas
+ARG SOURCES=https://github.com/danxiaonuo/legacy-bk-paas
 ENV SOURCES=$SOURCES
 ARG SOURCES_DIR=/tmp/legacy-bk-paas
 ENV SOURCES_DIR=$SOURCES_DIR
@@ -61,7 +61,10 @@ RUN --mount=type=cache,target=/var/lib/apt/,sharing=locked \
    cp -rfp /data/paas/login/conf/settings_production.py.sample /data/paas/login/conf/settings_production.py && \
    cp -rfp /data/paas/esb/configs/default_template.py /data/paas/esb/configs/default.py && \
    sed -i '/uWSGI/d' /data/paas/*/requirements.txt && \
-   cd /data/paas/paas && pip install -r requirements.txt
+   cd /data/paas/paas && pip install -r requirements.txt && \
+   cd /data/paas/login && pip install -r requirements.txt && \
+   cd /data/paas/appengine && pip install -r requirements.txt && \
+   cd /data/paas/esb && pip install -r requirements.txt
 
 # 拷贝文件
 COPY ["./docker-entrypoint.sh", "/usr/bin/"]
