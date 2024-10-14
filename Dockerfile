@@ -56,6 +56,7 @@ RUN --mount=type=cache,target=/var/lib/apt/,sharing=locked \
    # 克隆源码
    git clone --depth=1 -b $VERSION --progress ${SOURCES} ${SOURCES_DIR} && \
    mkdir -pv /data && cp -rfp ${SOURCES_DIR}/paas-ce/paas /data/ && \
+   mkdir -pv /data/paas/logs && \
    cp -rfp /data/paas/paas/conf/settings_production.py.sample /data/paas/paas/conf/settings_production.py && \
    cp -rfp /data/paas/login/conf/settings_production.py.sample /data/paas/login/conf/settings_production.py && \
    cp -rfp /data/paas/esb/configs/default_template.py /data/paas/esb/configs/default.py && \
