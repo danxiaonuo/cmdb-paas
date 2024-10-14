@@ -4,9 +4,9 @@ set -o pipefail
 
 set +e
 
+: ${PAAS_PATH:="/data/paas"}
 : ${DB_CHARACTER_SET:="utf8mb4"}
 : ${DB_CHARACTER_COLLATE:="utf8mb4_bin"}
-: ${DB_SERVER_DBNAME:="open_paas"}
 
 # 检查mysql数据库变量
 check_variables_mysql() {
@@ -190,6 +190,8 @@ prepare_db() {
 }
 
 update_config() {
-   sed -i "s/NAME[[:space:]]*':[[:space:]]*'open_paas/NAME': '$DB_SERVER_DBNAME/g" /data/paas/paas/conf/settings_production.py
+   sed -i "s/NAME[[:space:]]*':[[:space:]]*'[^']*/NAME': '$DB_SERVER_DBNAME/g" $PAAS_PATH/paas/conf/settings_production.py
+   sed -i "s/USER[[:space:]]*':[[:space:]]*'[^']*'/USER': '$DB_SERVER_USER'/g" $PAAS_PATH/paas/conf/settings_production.py
+   sed -i "s/PASSWORD[[:space:]]*':[[:space:]]*'[^']*'/PASSWORD': '$DB_SERVER_PASS'/g" $PAAS_PATH/paas/conf/settings_production.py
    
 }
