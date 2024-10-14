@@ -226,3 +226,15 @@ update_config() {
    sed -i "s|ESB_TOKEN[[:space:]]*=[[:space:]]*'[^']*'|ESB_TOKEN = '$ESBTOKEN'|g" $PAAS_PATH/esb/configs/default.py
    
 }
+
+migrate(){
+   cd $PAAS_PATH/paas
+   python manage.py migrate
+   cd $PAAS_PATH/login
+   python manage.py migrate
+}
+
+prepare_db
+update_config
+migrate
+
